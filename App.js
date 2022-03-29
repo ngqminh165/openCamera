@@ -8,6 +8,7 @@ const socketEndpoint = "http://localhost:3000";
 export default function App() {
   const [hasConnection, setConnection] = useState(false);
   const [time, setTime] = useState(null);
+  const [message, setMessage] = useState(null);
 
   useEffect(function didMount() {
     const socket = io(socketEndpoint, {
@@ -16,6 +17,11 @@ export default function App() {
 
     socket.io.on("open", () => setConnection(true));
     socket.io.on("close", () => setConnection(false));
+
+    socket.on("motion-detect", (data) => {
+      console.log(data)
+      setMessage(data);
+    });
 
     socket.on("time-msg", (data) => {
       setTime(new Date(data.time).toString());
@@ -43,9 +49,11 @@ export default function App() {
       {hasConnection && (
         <>
           <Text style={[styles.paragraph, { fontWeight: "bold" }]}>
-            Server time
+            Server time - Waiting the motion detect
           </Text>
           <Text style={styles.paragraph}>{time}</Text>
+          <Text style={styles.paragraph}>{message}</Text>
+
         </>
       )}
     </View>

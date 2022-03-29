@@ -8,6 +8,9 @@
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
-    "socket.io": "^4.3.1"
+    "socket.io": "^4.3.1",
+    "matrix-js-sdk": "^15.5.2",
+    "node-localstorage": "^2.2.1",
+    "olm": "https://matrix.org/packages/npm/olm/olm-3.2.1.tgz"
   }
 }
